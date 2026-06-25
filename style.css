@@ -1,0 +1,594 @@
+:root {
+  --bg: #0f1226;
+  --bg-card: #1a1e3a;
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+  --text: #e8e9f3;
+  --text-muted: #8b8fb3;
+  --border: rgba(99, 102, 241, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at top, #161a36 0%, var(--bg) 70%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  padding: 32px 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #818cf8, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.card:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.card-icon {
+  font-size: 1.75rem;
+  margin-bottom: 4px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.footer p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---- Soundscape screen ---- */
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.btn-back {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-back:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.screen-heading h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.screen-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.select-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+.sound-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sound-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.sound-card:active {
+  transform: scale(0.98);
+}
+
+.sound-card.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.sound-icon {
+  font-size: 1.5rem;
+}
+
+.sound-name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.duration-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.duration-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.duration-label span:last-child {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+#duration-slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.duration-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.btn-primary {
+  margin-top: auto;
+  text-align: center;
+  background: linear-gradient(135deg, var(--accent), #818cf8);
+  border: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.session-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.breathing-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 220px;
+}
+
+.breathing-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #a5b4fc, var(--accent) 60%, #4338ca 100%);
+  box-shadow: 0 0 70px rgba(99, 102, 241, 0.55);
+  animation: breathe 10s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.breathing-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -16px;
+}
+
+.timer-display {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.btn-stop {
+  width: 100%;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-weight: 600;
+  color: #f87171;
+}
+
+.btn-stop:active {
+  transform: scale(0.98);
+}
+
+/* ---- Smart Alarm screen ---- */
+
+.time-picker {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 700;
+  accent-color: var(--accent);
+}
+
+.time-picker::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.alarm-explainer {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px;
+  cursor: pointer;
+}
+
+.toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.toggle-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 28px;
+  border-radius: 14px;
+  background: #2a2f55;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.toggle-switch.on {
+  background: var(--accent);
+}
+
+.toggle-knob {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s ease;
+}
+
+.toggle-switch.on .toggle-knob {
+  transform: translateX(22px);
+}
+
+.smart-mode-warning {
+  font-size: 0.8rem;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  padding: 10px 14px;
+  line-height: 1.4;
+}
+
+.alarm-glow {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: radial-gradient(circle at 35% 30%, #a5b4fc, var(--accent) 60%, #4338ca 100%);
+  box-shadow: 0 0 70px rgba(99, 102, 241, 0.5);
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.alarm-status-text {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.alarm-mode-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -16px;
+}
+
+/* ---- Mood Tracker screen ---- */
+
+.mood-view {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  flex: 1;
+}
+
+.mood-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mood-emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.mood-emoji-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.mood-emoji-card:active {
+  transform: scale(0.96);
+}
+
+.mood-emoji-card.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+  transform: scale(1.05);
+}
+
+.mood-emoji-icon {
+  font-size: 1.8rem;
+}
+
+.mood-emoji-text {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.mood-emoji-card.active .mood-emoji-text {
+  color: var(--text);
+}
+
+.mood-confirm {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.mood-stats {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mood-stats-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.mood-empty {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px 0;
+}
+
+.mood-chart {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  height: 150px;
+}
+
+.mood-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.mood-bar-value {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.mood-bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mood-bar {
+  width: 70%;
+  border-radius: 8px 8px 3px 3px;
+  min-height: 4px;
+  transition: height 0.3s ease;
+}
+
+.mood-bar-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.mood-average {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mood-trend {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucid — Smart Sleep Companion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <section id="screen-home" class="screen active">
+      <header class="header">
+        <h1 class="title">Lucid</h1>
+        <p class="subtitle">Smart Sleep Companion</p>
+      </header>
+
+      <main class="menu">
+        <div class="card" id="card-soundscape" role="button" tabindex="0">
+          <span class="card-icon">🎵</span>
+          <h2 class="card-title">Sleep Soundscape</h2>
+          <p class="card-desc">Panduan audio untuk tertidur lebih cepat</p>
+        </div>
+
+        <div class="card" id="card-alarm" role="button" tabindex="0">
+          <span class="card-icon">⏰</span>
+          <h2 class="card-title">Smart Alarm</h2>
+          <p class="card-desc">Bangun di momen terbaik</p>
+        </div>
+
+        <div class="card" id="card-mood" role="button" tabindex="0">
+          <span class="card-icon">😊</span>
+          <h2 class="card-title">Mood Tracker</h2>
+          <p class="card-desc">Lacak kualitas tidurmu</p>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>v3 — evidence-based sleep assistant</p>
+      </footer>
+    </section>
+
+    <section id="screen-soundscape" class="screen">
+      <header class="screen-header">
+        <div class="btn-back" id="back-soundscape" role="button" tabindex="0" aria-label="Kembali">←</div>
+        <div class="screen-heading">
+          <h2>Sleep Soundscape</h2>
+          <p class="screen-sub">Pilih suara dan durasi untuk tertidur</p>
+        </div>
+      </header>
+
+      <div id="select-view" class="select-view">
+        <div class="sound-grid">
+          <div class="sound-card" data-sound="rain" role="button" tabindex="0" aria-pressed="false">
+            <span class="sound-icon">🌧️</span>
+            <span class="sound-name">Rain</span>
+          </div>
+          <div class="sound-card" data-sound="ocean" role="button" tabindex="0" aria-pressed="false">
+            <span class="sound-icon">🌊</span>
+            <span class="sound-name">Ocean Waves</span>
+          </div>
+          <div class="sound-card" data-sound="night" role="button" tabindex="0" aria-pressed="false">
+            <span class="sound-icon">🌙</span>
+            <span class="sound-name">Night Ambience</span>
+          </div>
+        </div>
+
+        <div class="duration-block">
+          <div class="duration-label">
+            <span>Durasi</span>
+            <span id="duration-value">20 menit</span>
+          </div>
+          <input type="range" id="duration-slider" min="0" max="2" step="1" value="1">
+          <div class="duration-ticks"><span>15</span><span>20</span><span>30</span></div>
+        </div>
+
+        <div class="card btn-primary" id="start-session" role="button" tabindex="0">Mulai Tidur</div>
+      </div>
+
+      <div id="session-view" class="session-view hidden">
+        <div class="breathing-wrap">
+          <div class="breathing-circle"></div>
+        </div>
+        <p class="breathing-label">Tarik napas... hembuskan...</p>
+        <div id="timer-display" class="timer-display">20:00</div>
+        <div class="card btn-stop" id="stop-session" role="button" tabindex="0">Berhenti</div>
+      </div>
+    </section>
+
+    <section id="screen-alarm" class="screen">
+      <header class="screen-header">
+        <div class="btn-back" id="back-alarm" role="button" tabindex="0" aria-label="Kembali">←</div>
+        <div class="screen-heading">
+          <h2>Smart Alarm</h2>
+          <p class="screen-sub">Bangun di momen tidur paling ringan</p>
+        </div>
+      </header>
+
+      <div id="alarm-select-view" class="select-view">
+        <div class="duration-block">
+          <div class="duration-label">
+            <span>Waktu bangun target</span>
+          </div>
+          <input type="time" id="alarm-time" class="time-picker" value="06:00">
+        </div>
+
+        <p class="alarm-explainer">Lucid akan membunyikan alarm di momen tidur paling ringanmu, dalam jendela 30 menit sebelum waktu target.</p>
+
+        <div class="toggle-row" id="smart-mode-toggle" role="switch" aria-checked="true" tabindex="0">
+          <div class="toggle-text">
+            <span class="toggle-title">Smart Mode</span>
+            <span class="toggle-sub">Deteksi fase tidur ringan via gerakan</span>
+          </div>
+          <div class="toggle-switch on">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+        <div class="card btn-primary" id="activate-alarm" role="button" tabindex="0">Aktifkan Alarm</div>
+      </div>
+
+      <div id="alarm-active-view" class="session-view hidden">
+        <div class="alarm-glow">🌙</div>
+        <p class="alarm-status-text">Alarm aktif — selamat tidur 🌙</p>
+        <div id="alarm-target-display" class="timer-display">06:00</div>
+        <p id="alarm-mode-note" class="alarm-mode-note"></p>
+        <p id="smart-mode-warning" class="smart-mode-warning hidden">Smart Mode membutuhkan smartphone — alarm akan berbunyi tepat di waktu target.</p>
+        <div class="card btn-stop" id="cancel-alarm" role="button" tabindex="0">Batalkan</div>
+      </div>
+    </section>
+
+    <section id="screen-mood" class="screen">
+      <header class="screen-header">
+        <div class="btn-back" id="back-mood" role="button" tabindex="0" aria-label="Kembali">←</div>
+        <div class="screen-heading">
+          <h2>Mood Tracker</h2>
+          <p class="screen-sub">Lacak kualitas tidurmu</p>
+        </div>
+      </header>
+
+      <div class="mood-view">
+        <h3 class="mood-question">Bagaimana perasaanmu pagi ini?</h3>
+
+        <div class="mood-emoji-grid">
+          <div class="mood-emoji-card" data-score="1" role="button" tabindex="0">
+            <span class="mood-emoji-icon">😫</span>
+            <span class="mood-emoji-text">Sangat Lelah</span>
+          </div>
+          <div class="mood-emoji-card" data-score="2" role="button" tabindex="0">
+            <span class="mood-emoji-icon">😴</span>
+            <span class="mood-emoji-text">Masih Ngantuk</span>
+          </div>
+          <div class="mood-emoji-card" data-score="3" role="button" tabindex="0">
+            <span class="mood-emoji-icon">😐</span>
+            <span class="mood-emoji-text">Biasa Aja</span>
+          </div>
+          <div class="mood-emoji-card" data-score="4" role="button" tabindex="0">
+            <span class="mood-emoji-icon">😊</span>
+            <span class="mood-emoji-text">Cukup Segar</span>
+          </div>
+          <div class="mood-emoji-card" data-score="5" role="button" tabindex="0">
+            <span class="mood-emoji-icon">🤩</span>
+            <span class="mood-emoji-text">Sangat Segar</span>
+          </div>
+        </div>
+
+        <p id="mood-confirm" class="mood-confirm hidden">Mood hari ini tersimpan!</p>
+
+        <div class="mood-stats">
+          <h3 class="mood-stats-title">Statistik 7 Hari Terakhir</h3>
+
+          <p id="mood-empty" class="mood-empty hidden">Belum ada data. Mulai catat moodmu setiap pagi!</p>
+
+          <div id="mood-chart-wrap" class="hidden">
+            <div id="mood-chart" class="mood-chart"></div>
+            <p id="mood-average" class="mood-average"></p>
+            <p id="mood-trend" class="mood-trend"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/soundscape.js"></script>
+  <script src="js/alarm.js"></script>
+  <script src="js/mood.js"></script>
+</body>
+</html>
